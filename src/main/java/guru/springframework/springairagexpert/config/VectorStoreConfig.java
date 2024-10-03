@@ -2,7 +2,7 @@ package guru.springframework.springairagexpert.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingClient;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
@@ -19,9 +19,10 @@ import java.util.List;
 @Slf4j
 @Configuration
 public class VectorStoreConfig {
+
     @Bean
-    SimpleVectorStore simpleVectorStore(EmbeddingClient embeddingClient, VectorStoreProperties vectorStoreProperties) {
-        var store =  new SimpleVectorStore(embeddingClient);
+    SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel, VectorStoreProperties vectorStoreProperties) {
+        var store =  new SimpleVectorStore(embeddingModel);
         File vectorStoreFile = new File(vectorStoreProperties.getVectorStorePath());
 
         if (vectorStoreFile.exists()) {
